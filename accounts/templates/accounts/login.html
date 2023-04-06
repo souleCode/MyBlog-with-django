@@ -1,0 +1,62 @@
+
+
+{% extends 'posts/layouts/base.html' %}
+{% load static %}
+  
+{% block title %}Login{% endblock title %}
+
+
+
+{% block body %}
+<h1 class="text-center mb-3">Login</h1>
+<!-- ce contenue est le copier-coller du contenue de New Post -->
+
+<div class="container">
+     <div class="row">
+       <div class="col-md-8 mx-auto">
+       <form action="" method="post" enctype="multipart/form-data">
+           {% csrf_token %}
+           {% if form.none_field_errors %}
+           
+                   {% for error in form.none_field_errors  %}
+                 <p class="text-danger">
+                   <strong>{{ error }} </strong>
+                 </p>
+               {% endfor %}
+           {% endif %}
+           
+           {% for field in form %}
+           
+           <div class="form_group">
+                {{ field.label_tag }} 
+                <!-- {% if field.field.required %}
+                 <span class="required">
+                   *
+                 </span> -->
+                {% endif %}
+                {{ field }}
+               {% if field.help_text %}
+                <p class="help">
+                 {{ field.help_text }}
+                </p>
+               {% endif %}
+
+               {% if field.errors %}
+                   {% for error in field.errors %}
+                       <p class="text-danger"><strong> {{ error }} </strong></p>
+                {% endfor %}
+               
+               {% endif %}
+
+           </div>
+           {% endfor %}
+           <br>  
+         <input type="submit" class="btn btn-primary mb-3" value="Login">
+       </form>
+
+         </div>
+      </div>
+      <div class="col-md-4"></div>
+   </div>
+{% endblock body %}
+

@@ -1,0 +1,29 @@
+
+
+{% extends 'posts/layouts/base.html' %}
+
+
+{% block title %}Show
+{% endblock title %}
+
+
+{% block body %}
+<h1>Show:</h1>
+<div class="card mb-3">
+            <img src=" {{ post.image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title"> {{ post.title }} </h5>
+            <p class="card-text"> {{ post.content }} </p>
+
+            {% comment %} les deux boutons de delete_post et update_post {% endcomment %}
+            {% comment %} pour afficher les option delete et update sur des poste qui nous appartient seulemnt. ce sont les permission,on a utilier post.user==request.user {% endcomment %}
+           <div>
+            {% if post.user == request.user %} 
+                <div class="card-footer">
+                  <a href="  {% url 'posts:update_post' post.id %} " class="btn btn-info" >Update</a>
+                  <a href="  {% url 'posts:delete_post' post.id %} " class="btn btn-danger" >Delete Post</a>
+                </div>
+                {% endif %}
+           </div>
+</div>
+{% endblock body %}
